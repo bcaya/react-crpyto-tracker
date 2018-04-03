@@ -18,7 +18,7 @@ class CoinList extends React.Component {
   }
 
   componentWillUnmount(){
-    
+    clearInterval(this.ticker)
   }
 
   render() {
@@ -37,7 +37,7 @@ class CoinList extends React.Component {
             }
           </Table.Header>
           <Table.Body>
-            { coins.map( coin => {
+            {coins.map( coin => {
                 const { price, name, symbol, id, cmc_id } = coin
                 return (
                   <Table.Row key={id}>
