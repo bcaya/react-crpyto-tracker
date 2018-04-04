@@ -36,6 +36,31 @@ class Coin extends React.Component {
       })
   }
 
+  calcPrice = (price, change) => { 
+    let c = parseFloat(change)
+    let p = parseFloat(price) 
+    if ( c < 0 )
+      return p * (Math.abs((c / 100)) + 1)
+    else 
+      return p / ((c /100) +1 )
+  }
+
+  formatData = () => { 
+    const { coin } = this.state; 
+    const { 
+      price_usd, 
+      percent_change_7d, 
+      percent_change_24h, 
+      percent_change_1h, 
+    } = coin; 
+    return [ 
+      { time: '7 days', price: this.calcPrice(price_usd, percent_change_7d)},
+      { time: '24 Hours', price: this.calcPrice(price_usd, percent_change_24h)},
+      { time: '1 hour', price:this.calcPrice(price_usd, percent_change_1h)},
+      { time: 'Current', price: parseFloat(price_usd)}
+    ]
+  }
+
   render() {
     const { coin } = this.state;
     return (
